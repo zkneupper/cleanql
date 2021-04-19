@@ -5,3 +5,7 @@ conda create -n devenv black pandas
 source activate devenv
 
 pip install pre-commit pre-commit-hooks add-trailing-comma
+
+pre-commit install
+
+pre-commit run --all-files
