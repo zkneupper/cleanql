@@ -1,6 +1,6 @@
 # Notes
 
-conda create -n devenv black pandas ipython
+conda create -n devenv black pandas ipython pylint
 
 source activate devenv
 
