@@ -1,6 +1,6 @@
 # Notes
 
-conda create -n devenv black pandas
+conda create -n devenv black pandas ipython
 
 source activate devenv
 
