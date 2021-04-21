@@ -31,14 +31,14 @@ def check_filename_extension(filename):
     if not filename.suffix.lower() == ".sql":
         message = f"Invalid file type. `{filename}` is not a `.sql` file."
         print_error(message)
-        exit(1)
+        sys.exit(1)
 
 
 def check_filename_exists(filename):
     if not filename.exists():
         message = f"File `{filename}` not found."
         print_error(message)
-        exit(1)
+        sys.exit(1)
 
 
 @click.command()
