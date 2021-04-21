@@ -3,7 +3,6 @@
 
 # Python standard library
 import pathlib
-import re
 import sys
 
 # External packages
