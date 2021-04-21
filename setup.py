@@ -22,7 +22,7 @@ test_requirements = [
 
 setup(
     python_requires=">=3.5",
-    name="formatter",
+    name="sql_formatter",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     setup_requires=setup_requirements,
