@@ -1,11 +1,19 @@
 # Notes
 
-conda create -n devenv black pandas ipython pylint pytest
+conda create -n devenv black ipython pandas pylint pytest
 
-source activate devenv
+conda activate devenv
 
 pip install pre-commit pre-commit-hooks add-trailing-comma
 
 pre-commit install
 
 pre-commit run --all-files
+
+
+
+pip install -e ./sql_formatter/
+
+pip uninstall sql_formatter
+
+conda remove --name devenv --all
