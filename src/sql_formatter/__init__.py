@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-from .formatter import (
-    remove_nones,
+from sql_formatter.formatter import (
     remove_empty_strings,
+    remove_nones,
     split_sql,
 )
