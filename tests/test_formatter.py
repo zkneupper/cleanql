@@ -8,6 +8,11 @@ import sys
 # External packages
 import pytest
 
+# import formatter
+
+
+# print(dir(formatter))
+
 
 def test_print_error(capsys):
     print("hello")
