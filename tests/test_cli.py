@@ -68,16 +68,12 @@ class TestCheckFilenameExtension:
         filename = pathlib.Path(filename)
         sql_formatter.check_filename_extension(filename)
         captured = capsys.readouterr()
+
         assert captured.out == ""
         assert captured.err == ""
 
     @pytest.mark.parametrize("filename,expected_stderr", testdata_fail)
     def test_check_filename_extension_fail(self, capsys, filename, expected_stderr):
-        filename = "filename.txt"
-        expected_stderr = (
-            "\x1b[1;31mInvalid file type. `filename.txt` is not a `.sql` file.\x1b[0m"
-        )
-
         filename = pathlib.Path(filename)
 
         with pytest.raises(SystemExit) as pytest_wrapped_e:
