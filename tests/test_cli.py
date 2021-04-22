@@ -14,23 +14,6 @@ import pytest
 import sql_formatter
 
 
-# 1. Write one test
-# 2. parameterize one test
-# 3. make more test cases
-
-
-# testdata = [
-#     (datetime(2001, 12, 12), datetime(2001, 12, 11), timedelta(1)),
-#     (datetime(2001, 12, 11), datetime(2001, 12, 12), timedelta(-1)),
-# ]
-
-
-# @pytest.mark.parametrize("a,b,expected", testdata)
-# def test_timedistance_v0(a, b, expected):
-#     diff = a - b
-#     assert diff == expected
-
-
 testdata = [
     ("filename.sql"),
     ("filename.SQL"),
@@ -50,6 +33,26 @@ def test_check_filename_extension_pass(capsys, filename):
     assert captured.err == ""
 
 
+#########################################################################################################
+#########################################################################################################
+
+# 1. Write one test
+# 2. parameterize one test
+# 3. make more test cases
+
+
+# testdata = [
+#     (datetime(2001, 12, 12), datetime(2001, 12, 11), timedelta(1)),
+#     (datetime(2001, 12, 11), datetime(2001, 12, 12), timedelta(-1)),
+# ]
+
+
+# @pytest.mark.parametrize("a,b,expected", testdata)
+# def test_timedistance_v0(a, b, expected):
+#     diff = a - b
+#     assert diff == expected
+
+
 def test_check_filename_extension_fail(capsys):
     filename = "filename.txt"
     # expected_error_message = "Invalid file type. `filename.txt` is not a `.sql` file."
@@ -60,11 +63,14 @@ def test_check_filename_extension_fail(capsys):
     filename = pathlib.Path(filename)
 
     with pytest.raises(SystemExit):
-        # with pytest.raises(SystemExit, match = expected_error_message):
         sql_formatter.check_filename_extension(filename)
 
-        # captured = capsys.readouterr()
-        # actual_error_message = captured.err
+    # with pytest.raises(SystemExit):
+    #     # with pytest.raises(SystemExit, match = expected_error_message):
+    #     sql_formatter.check_filename_extension(filename)
+
+    # captured = capsys.readouterr()
+    # actual_error_message = captured.err
 
     # assert actual_error_message == expected_error_message
 
