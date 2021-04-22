@@ -11,22 +11,11 @@ import sys
 # External packages
 import pytest
 
+# Internal Modules
+from capture_stderr import CaptureStderr
+
 # Tested package
 import sql_formatter
-
-
-class CaptureStderr(list):
-    """A context manager for capturing stderr"""
-
-    def __enter__(self):
-        self._stderr = sys.stderr
-        sys.stderr = self._stringio = io.StringIO()
-        return self
-
-    def __exit__(self, *args):
-        self.extend(self._stringio.getvalue().splitlines())
-        del self._stringio
-        sys.stderr = self._stderr
 
 
 class TestCheckFilenameExtension:
