@@ -9,6 +9,9 @@ import sys
 # External packages
 import click
 
+# Internal modules
+import formatter
+
 
 def read_file(filepath):
     with open(filepath, "r") as file:
@@ -55,13 +58,14 @@ def cli(filename):
 
     sql = read_file(filepath)
 
-    print("Before:")
+    print("Before:\n")
     print(sql)
 
-    sql_output = "SELECT * FROM your_table;"
+    sql_output = formatter.format_sql(sql)
 
-    print("After:")
+    print("\nAfter:\n")
     print(sql_output)
+    print("\n")
 
     write_file(filepath, sql_output)
 
