@@ -1,6 +1,6 @@
 # Notes
 
-conda create -n devenv black ipython pandas pylint pytest
+conda create -n devenv black ipython pandas pylint pytest sqlparse
 
 conda activate devenv
 
