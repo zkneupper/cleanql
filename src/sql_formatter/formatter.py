@@ -76,8 +76,15 @@ def format_indentation(sql):
     return sql_output
 
 
+def remove_trailing_whitespace(string):
+    string_output = (x.rstrip() for x in string.split("\n"))
+    string_output = "\n".join(string_output)
+    return string_output
+
+
 def format_sql(sql):
 
-    sql_output = format_indentation(sql)
-
+    sql_output = sql
+    sql_output = format_indentation(sql_output)
+    sql_output = remove_trailing_whitespace(sql_output)
     return sql_output
