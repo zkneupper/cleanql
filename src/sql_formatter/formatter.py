@@ -38,6 +38,20 @@ def capitalize_keywords(string, sql_keywords):
         return string
 
 
+def preserve_case(string):
+    pattern = "(\-\-.+\n)|(\".+\")|('.+')"  # |(\$\{.+\})|(\W)"
+    return bool(re.fullmatch(pattern, string))
+
+
+def make_lower_case(string, sql_keywords):
+    if preserve_case(string):
+        return string
+    elif is_keyword(string, sql_keywords):
+        return string
+    else:
+        return string.lower()
+
+
 def format_indentation(sql):
 
     format_kwargs = {
