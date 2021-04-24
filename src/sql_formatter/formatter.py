@@ -27,6 +27,17 @@ def split_sql(sql):
     return tokens
 
 
+def is_keyword(string, sql_keywords):
+    return string.lower() in sql_keywords
+
+
+def capitalize_keywords(string, sql_keywords):
+    if is_keyword(string, sql_keywords):
+        return string.upper()
+    else:
+        return string
+
+
 def format_indentation(sql):
 
     format_kwargs = {
