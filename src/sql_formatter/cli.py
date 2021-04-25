@@ -75,7 +75,14 @@ flavors = [
 @click.command()
 @click.argument("paths", nargs=-1)
 @click.option(
-    "--flavor", type=click.Choice(flavors, case_sensitive=False), default="COMMON",
+    "--verbose", "-v", is_flag=True, default=False, help="Print verbose output.",
+)
+@click.option(
+    "--flavor",
+    "-f",
+    type=click.Choice(flavors, case_sensitive=False),
+    default="COMMON",
+    help="Specify the favor of SQL syntax.",
 )
 def cli(paths):
     """The uncompromising SQL formatter."""
