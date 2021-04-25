@@ -4,6 +4,7 @@
 
 # Python standard library
 # import pathlib
+import functools
 import sys
 
 # External packages
@@ -15,6 +16,10 @@ import cleanql.formatter as formatter
 import cleanql.preprocess_paths as preprocess_paths
 
 
+out = functools.partial(click.secho, bold=True, err=True)
+err = functools.partial(click.secho, fg="red", err=True)
+
+
 def read_file(filepath):
     with open(filepath, "r") as file:
         text = file.read()
@@ -24,6 +29,9 @@ def read_file(filepath):
 def write_file(filepath, text):
     with open(filepath, "w") as file:
         file.write(text)
+
+
+# functools.partial
 
 
 def bold_color(message, color="red"):
@@ -109,6 +117,8 @@ def cli(paths, flavor, verbose):
             message = bold_color(message, color="green")
             message += str(filepath)
             print(message, flush=True)
+
+    out("All done! ✨ 🍰 ✨")
 
 
 if __name__ == "__main__":
