@@ -44,6 +44,12 @@ def check_filename_exists(filename):
         sys.exit(1)
 
 
+# Handle multiple files
+# .
+# or
+# no arg
+
+
 @click.command()
 @click.argument("filename")
 def cli(filename):
@@ -61,7 +67,7 @@ def cli(filename):
     print("Before:\n")
     print(sql)
 
-    sql_output = formatter.format_sql(sql)
+    sql_output = formatter.format_sql(sql, sql_keywords=None)
 
     print("\nAfter:\n")
     print(sql_output)

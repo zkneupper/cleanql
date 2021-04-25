@@ -2,9 +2,18 @@
 # -*- coding: UTF-8 -*-
 
 from sql_formatter.formatter import (
-    remove_empty_strings,
     remove_nones,
+    remove_empty_strings,
     split_sql,
+    is_keyword,
+    capitalize_if_keyword,
+    capitalize_keywords,
+    preserve_case,
+    make_token_lower_case,
+    apply_lower_case,
+    format_indentation,
+    remove_trailing_whitespace,
+    format_sql,
 )
 
 from sql_formatter.cli import (

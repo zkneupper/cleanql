@@ -28,14 +28,23 @@ def split_sql(sql):
 
 
 def is_keyword(string, sql_keywords):
-    return string.lower() in sql_keywords
+    return string.upper() in sql_keywords
 
 
-def capitalize_keywords(string, sql_keywords):
+def capitalize_if_keyword(string, sql_keywords):
     if is_keyword(string, sql_keywords):
         return string.upper()
     else:
         return string
+
+
+def capitalize_keywords(sql, sql_keywords):
+    tokens = split_sql(sql)
+    tokens_keywords_capitalized = [
+        capitalize_if_keyword(token, sql_keywords) for token in tokens
+    ]
+    sql_output = "".join(tokens_keywords_capitalized)
+    return sql_output
 
 
 def preserve_case(string):
@@ -43,13 +52,20 @@ def preserve_case(string):
     return bool(re.fullmatch(pattern, string))
 
 
-def make_lower_case(string, sql_keywords):
+def make_token_lower_case(string, sql_keywords):
     if preserve_case(string):
         return string
     elif is_keyword(string, sql_keywords):
         return string
     else:
         return string.lower()
+
+
+def apply_lower_case(sql, sql_keywords):
+    tokens = split_sql(sql)
+    tokens_lowered = [make_token_lower_case(token, sql_keywords) for token in tokens]
+    sql_output = "".join(tokens_lowered)
+    return sql_output
 
 
 def format_indentation(sql):
@@ -82,9 +98,21 @@ def remove_trailing_whitespace(string):
     return string_output
 
 
-def format_sql(sql):
+def format_sql(sql, sql_keywords=None):
+
+    if sql_keywords is None:
+        set_keywords = set(sqlparse.keywords.KEYWORDS.keys())
+        set_keywords_common = set(sqlparse.keywords.KEYWORDS_COMMON.keys())
+        set_keywords = set_keywords.union(set_keywords_common)
+        set_keywords = [x.upper() for x in set_keywords]
+        sql_keywords = set_keywords
 
     sql_output = sql
     sql_output = format_indentation(sql_output)
+
+    sql_output = apply_lower_case(sql_output, sql_keywords)
+    sql_output = capitalize_keywords(sql_output, sql_keywords)
+
     sql_output = remove_trailing_whitespace(sql_output)
+
     return sql_output
