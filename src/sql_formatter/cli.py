@@ -66,6 +66,7 @@ def check_filename_exists(filename):
 @click.command()
 @click.argument("paths", nargs=-1)
 def cli(paths):
+    """The uncompromising SQL formatter."""
 
     # paths will be a tuple, because nargs=-1
     # Convert tuple to list ; list of pathlib paths
