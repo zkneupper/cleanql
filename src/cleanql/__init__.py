@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-from sql_formatter.formatter import (
+from cleanql.formatter import (
     remove_nones,
     remove_empty_strings,
     split_sql,
@@ -16,7 +16,7 @@ from sql_formatter.formatter import (
     format_sql,
 )
 
-from sql_formatter.cli import (
+from cleanql.cli import (
     read_file,
     write_file,
     print_error,
@@ -25,7 +25,7 @@ from sql_formatter.cli import (
     cli,
 )
 
-from sql_formatter.preprocess_paths import (
+from cleanql.preprocess_paths import (
     _paths_tuple_to_pathlib_list,
     _check_paths_exist,
     _expand_dirs,

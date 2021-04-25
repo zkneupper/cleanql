@@ -9,7 +9,7 @@ import pytest
 from capture_stderr import CaptureStderr
 
 # Tested package
-import sql_formatter
+import cleanql
 
 
 class TestPrintError:
@@ -32,7 +32,7 @@ class TestPrintError:
     def test_check_filename_extension_fail(self, message, expected_stderr):
 
         with CaptureStderr() as output:
-            sql_formatter.print_error(message)
+            cleanql.print_error(message)
 
         assert len(output) == 1
         assert output[0] == expected_stderr

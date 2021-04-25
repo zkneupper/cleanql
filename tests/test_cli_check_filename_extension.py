@@ -12,7 +12,7 @@ import pytest
 from capture_stderr import CaptureStderr
 
 # Tested package
-import sql_formatter
+import cleanql
 
 
 class TestCheckFilenameExtension:
@@ -52,7 +52,7 @@ class TestCheckFilenameExtension:
     @pytest.mark.parametrize("filename", testdata_pass)
     def test_check_filename_extension_pass(self, capsys, filename):
         filename = pathlib.Path(filename)
-        sql_formatter.check_filename_extension(filename)
+        cleanql.check_filename_extension(filename)
         captured = capsys.readouterr()
 
         assert captured.out == ""
@@ -64,7 +64,7 @@ class TestCheckFilenameExtension:
 
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             with CaptureStderr() as output:
-                sql_formatter.check_filename_extension(filename)
+                cleanql.check_filename_extension(filename)
 
         assert pytest_wrapped_e.type == SystemExit
         assert pytest_wrapped_e.value.code == 1

@@ -11,8 +11,8 @@ import click
 
 # Internal modules
 # import formatter
-import sql_formatter.formatter as formatter
-import sql_formatter.preprocess_paths as preprocess_paths
+import cleanql.formatter as formatter
+import cleanql.preprocess_paths as preprocess_paths
 
 
 def read_file(filepath):

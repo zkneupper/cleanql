@@ -8,7 +8,7 @@ import sys
 # External packages
 import pytest
 
-import sql_formatter
+import cleanql
 
 
 # def test_print_error(capsys):

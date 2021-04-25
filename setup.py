@@ -22,11 +22,11 @@ test_requirements = [
 
 setup(
     python_requires=">=3.5",
-    name="sql_formatter",
+    name="cleanql",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     setup_requires=setup_requirements,
-    entry_points={"console_scripts": ["cleanql = sql_formatter:cli"]},
+    entry_points={"console_scripts": ["cleanql = cleanql:cli"]},
     test_suite="tests",
     tests_require=test_requirements,
 )
