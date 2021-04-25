@@ -10,7 +10,8 @@ import sys
 import click
 
 # Internal modules
-import formatter
+# import formatter
+import sql_formatter.formatter as formatter
 import sql_formatter.preprocess_paths as preprocess_paths
 
 
@@ -75,16 +76,16 @@ flavors = [
 @click.command()
 @click.argument("paths", nargs=-1)
 @click.option(
-    "--verbose", "-v", is_flag=True, default=False, help="Print verbose output.",
-)
-@click.option(
     "--flavor",
     "-f",
     type=click.Choice(flavors, case_sensitive=False),
     default="COMMON",
     help="Specify the favor of SQL syntax.",
 )
-def cli(paths):
+@click.option(
+    "--verbose", "-v", is_flag=True, default=False, help="Print verbose output.",
+)
+def cli(paths, flavor, verbose):
     """The uncompromising SQL formatter."""
 
     # paths will be a tuple, because nargs=-1
