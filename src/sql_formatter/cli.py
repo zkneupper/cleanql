@@ -11,6 +11,7 @@ import click
 
 # Internal modules
 import formatter
+import handle_paths_input
 
 
 def read_file(filepath):
@@ -50,30 +51,50 @@ def check_filename_exists(filename):
 # no arg
 
 
+# @click.command()
+# @click.argument("filename")
+# def cli(filename):
+
+# @click.command()
+# @click.argument("path")#, nargs=-1,)
+
+
 @click.command()
-@click.argument("filename")
-def cli(filename):
+@click.argument("paths", nargs=-1)
+def cli(paths):
 
-    cwd = pathlib.Path.cwd()
-    filename = pathlib.Path(filename)
+    # paths will be a tuple, because nargs=-1
+    # Convert tuple to list ; list of pathlib paths
+    paths = handle_paths_input._preprocess_paths(paths)
 
-    check_filename_extension(filename)
-    check_filename_exists(filename)
+    # print(f"paths:\t{paths}")
+    # print(f"type(paths):\t{type(paths)}")
+    # print(f"bool(paths):\t{bool(paths)}")
 
-    filepath = filename.absolute()
+    pass
 
-    sql = read_file(filepath)
+    for filepath in paths:
 
-    print("Before:\n")
-    print(sql)
+        check_filename_extension(filepath)
+        check_filename_exists(filepath)
 
-    sql_output = formatter.format_sql(sql, sql_keywords=None)
+        sql = read_file(filepath)
 
-    print("\nAfter:\n")
-    print(sql_output)
-    print("\n")
+        # print("Before:\n")
+        # print(sql)
 
-    write_file(filepath, sql_output)
+        sql_output = formatter.format_sql(sql, sql_keywords=None)
+
+        if sql == sql_output:
+            print(f"Unchanged: {filepath}")
+        else:
+            print(f"Formatted: {filepath}")
+
+        # print("\nAfter:\n")
+        # print(sql_output)
+        # print("\n")
+
+        write_file(filepath, sql_output)
 
 
 if __name__ == "__main__":
