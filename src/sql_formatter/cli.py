@@ -62,9 +62,21 @@ def check_filename_exists(filename):
 # or
 # no arg
 
+flavors = [
+    "COMMON",
+    "HQL",
+    # "IMPALA",
+    "ORACLE",
+    "POSTGRESQL",
+    # "SPARK",
+]
+
 
 @click.command()
 @click.argument("paths", nargs=-1)
+@click.option(
+    "--flavor", type=click.Choice(flavors, case_sensitive=False), default="COMMON",
+)
 def cli(paths):
     """The uncompromising SQL formatter."""
 
