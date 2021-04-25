@@ -4,15 +4,19 @@
 
 # Python standard library
 import pathlib
+import sys
+
+
+def _check_if_path_provided(paths):
+    # paths will be a tuple, because nargs=-1
+    if not paths:
+        print("No Path provided. Nothing to do 😴", flush=True)
+        sys.exit(0)
 
 
 def _paths_tuple_to_pathlib_list(paths):
 
     # paths will be a tuple, because nargs=-1
-
-    # Check if paths is an empty tuple
-    if not paths:
-        paths = [pathlib.Path.cwd()]
 
     # Convert tuple [of strings] to list of pathlib paths
     paths = [pathlib.Path(p).resolve() for p in paths]
@@ -42,6 +46,7 @@ def _expand_dirs(paths):
 
 
 def _preprocess_paths(paths):
+    _check_if_path_provided(paths)
     paths = _paths_tuple_to_pathlib_list(paths)
     _check_paths_exist(paths)
     paths = _expand_dirs(paths)
