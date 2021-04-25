@@ -24,3 +24,10 @@ from sql_formatter.cli import (
     check_filename_exists,
     cli,
 )
+
+from sql_formatter.preprocess_paths import (
+    _paths_tuple_to_pathlib_list,
+    _check_paths_exist,
+    _expand_dirs,
+    _preprocess_paths,
+)

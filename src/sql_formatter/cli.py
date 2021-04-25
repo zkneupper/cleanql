@@ -3,7 +3,7 @@
 
 
 # Python standard library
-import pathlib
+# import pathlib
 import sys
 
 # External packages
@@ -11,7 +11,7 @@ import click
 
 # Internal modules
 import formatter
-import handle_paths_input
+import sql_formatter.preprocess_paths as preprocess_paths
 
 
 def read_file(filepath):
@@ -25,9 +25,21 @@ def write_file(filepath, text):
         file.write(text)
 
 
+def bold_color(message, color="red"):
+    color_code_dict = {
+        "red": "31m",
+        "green": "32m",
+        "yellow": "33m",
+    }
+    color_code = color_code_dict[color]
+    message_red_bold = f"\x1b[1;{color_code}{message}\x1b[0m"
+    return message_red_bold
+
+
 def print_error(message):
     """Print with bold red text for failure messages to stderr"""
-    message_red_bold = f"\x1b[1;31m{message}\x1b[0m"
+    # message_red_bold = f"\x1b[1;31m{message}\x1b[0m"
+    message_red_bold = bold_color(message, color="red")
     print(message_red_bold, file=sys.stderr, flush=True)
 
 
@@ -51,27 +63,13 @@ def check_filename_exists(filename):
 # no arg
 
 
-# @click.command()
-# @click.argument("filename")
-# def cli(filename):
-
-# @click.command()
-# @click.argument("path")#, nargs=-1,)
-
-
 @click.command()
 @click.argument("paths", nargs=-1)
 def cli(paths):
 
     # paths will be a tuple, because nargs=-1
     # Convert tuple to list ; list of pathlib paths
-    paths = handle_paths_input._preprocess_paths(paths)
-
-    # print(f"paths:\t{paths}")
-    # print(f"type(paths):\t{type(paths)}")
-    # print(f"bool(paths):\t{bool(paths)}")
-
-    pass
+    paths = preprocess_paths._preprocess_paths(paths)
 
     for filepath in paths:
 
@@ -79,22 +77,17 @@ def cli(paths):
         check_filename_exists(filepath)
 
         sql = read_file(filepath)
-
-        # print("Before:\n")
-        # print(sql)
-
         sql_output = formatter.format_sql(sql, sql_keywords=None)
 
         if sql == sql_output:
             print(f"Unchanged: {filepath}")
         else:
-            print(f"Formatted: {filepath}")
+            write_file(filepath, sql_output)
 
-        # print("\nAfter:\n")
-        # print(sql_output)
-        # print("\n")
-
-        write_file(filepath, sql_output)
+            message = "Formatted: "
+            message = bold_color(message, color="green")
+            message += str(filepath)
+            print(message, flush=True)
 
 
 if __name__ == "__main__":
