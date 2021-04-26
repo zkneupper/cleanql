@@ -84,7 +84,7 @@ flavors = [
 ]
 
 
-@click.command()
+@click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.argument("paths", nargs=-1)
 @click.option(
     "--flavor",
