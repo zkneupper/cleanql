@@ -4,6 +4,7 @@
 
 # Python standard library
 import pathlib
+import sys
 
 # External packages
 import pytest
@@ -52,7 +53,7 @@ class TestCheckFilenameExtension:
     @pytest.mark.parametrize("filename", testdata_pass)
     def test_check_filename_extension_pass(self, capsys, filename):
         filename = pathlib.Path(filename)
-        cleanql.check_filename_extension(filename)
+        cleanql.check_filename_extension(filename, sys)
         captured = capsys.readouterr()
 
         assert captured.out == ""
@@ -64,9 +65,11 @@ class TestCheckFilenameExtension:
 
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             with CaptureStderr() as output:
-                cleanql.check_filename_extension(filename)
+                cleanql.check_filename_extension(filename, sys)
 
         assert pytest_wrapped_e.type == SystemExit
         assert pytest_wrapped_e.value.code == 1
         assert len(output) == 1
+
+        # Last assert is failing
         assert output[0] == expected_stderr
