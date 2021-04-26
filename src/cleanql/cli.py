@@ -52,18 +52,21 @@ def print_error(message):
     print(message_red_bold, file=sys.stderr, flush=True)
 
 
-def check_filename_extension(filename):
-    if not filename.suffix.lower() == ".sql":
-        message = f"Invalid file type. `{filename}` is not a `.sql` file."
+def check_filename_extension(filename, ctx: click.Context):
+    # if not filename.suffix.lower() == ".sql":
+    if not filename.suffix.lower() in [".sql", ".hql"]:
+        message = f"Invalid file type. `{filename}` is not a `.sql` or `.hql` file."
         print_error(message)
-        sys.exit(1)
+        ctx.exit(1)
 
 
-def check_filename_exists(filename):
+def check_filename_exists(
+    filename, ctx: click.Context,
+):
     if not filename.exists():
         message = f"File `{filename}` not found."
         print_error(message)
-        sys.exit(1)
+        ctx.exit(1)
 
 
 # Handle multiple files
@@ -93,12 +96,18 @@ flavors = [
 @click.option(
     "--verbose", "-v", is_flag=True, default=False, help="Print verbose output.",
 )
-def cli(paths, flavor, verbose):
+@click.pass_context
+def cli(ctx: click.Context, paths, flavor, verbose):
     """The uncompromising SQL formatter."""
 
     # paths will be a tuple, because nargs=-1
     # Convert tuple to list ; list of pathlib paths
-    paths = preprocess_paths._preprocess_paths(paths)
+    # paths = preprocess_paths._preprocess_paths(paths)
+    paths = preprocess_paths._preprocess_paths(paths, ctx)
+
+    if not paths:
+        out("No Python files are present to be formatted. Nothing to do 😴")
+        ctx.exit(0)
 
     reformatted = "reformatted"
     unchanged = "left unchanged"
@@ -110,24 +119,17 @@ def cli(paths, flavor, verbose):
 
     for filepath in paths:
 
-        check_filename_extension(filepath)
-        check_filename_exists(filepath)
+        check_filename_extension(filepath, ctx)
+        check_filename_exists(filepath, ctx)
 
         sql = read_file(filepath)
         sql_output = formatter.format_sql(sql, sql_keywords=None)
 
         if sql == sql_output:
             same_count += 1
-            # print(f"Unchanged: {filepath}")
         else:
             change_count += 1
-
             write_file(filepath, sql_output)
-
-            # message = "Formatted: "
-            # message = bold_color(message, color="green")
-            # message += str(filepath)
-            # print(message, flush=True)
 
     out("All done! ✨ 🍰 ✨")
 
