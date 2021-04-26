@@ -85,7 +85,9 @@ flavors = [
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.argument("paths", nargs=-1)
+@click.argument(
+    "paths", nargs=-1,
+)  # , help="Path(s) to SQL file(s) or folder(s) that contain(s) SQL files.",)
 @click.option(
     "--flavor",
     "-f",
@@ -98,7 +100,10 @@ flavors = [
 )
 @click.pass_context
 def cli(ctx: click.Context, paths, flavor, verbose):
-    """The uncompromising SQL formatter."""
+    """The uncompromising SQL formatter.
+
+    Pass path(s) to SQL file(s) or folder(s) that contain(s) SQL files.
+    """
 
     # paths will be a tuple, because nargs=-1
     # Convert tuple to list ; list of pathlib paths
