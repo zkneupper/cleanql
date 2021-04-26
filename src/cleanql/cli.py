@@ -100,6 +100,14 @@ def cli(paths, flavor, verbose):
     # Convert tuple to list ; list of pathlib paths
     paths = preprocess_paths._preprocess_paths(paths)
 
+    reformatted = "reformatted"
+    unchanged = "left unchanged"
+    failed = "failed to reformat"
+
+    change_count = 0
+    same_count = 0
+    failure_count = 0
+
     for filepath in paths:
 
         check_filename_extension(filepath)
@@ -109,16 +117,32 @@ def cli(paths, flavor, verbose):
         sql_output = formatter.format_sql(sql, sql_keywords=None)
 
         if sql == sql_output:
-            print(f"Unchanged: {filepath}")
+            same_count += 1
+            # print(f"Unchanged: {filepath}")
         else:
+            change_count += 1
+
             write_file(filepath, sql_output)
 
-            message = "Formatted: "
-            message = bold_color(message, color="green")
-            message += str(filepath)
-            print(message, flush=True)
+            # message = "Formatted: "
+            # message = bold_color(message, color="green")
+            # message += str(filepath)
+            # print(message, flush=True)
 
     out("All done! ✨ 🍰 ✨")
+
+    report = list()
+
+    if change_count:
+        s = "s" if change_count > 1 else ""
+        report.append(click.style(f"{change_count} file{s} {reformatted}", bold=True))
+
+    if same_count:
+        s = "s" if same_count > 1 else ""
+        report.append(f"{same_count} file{s} {unchanged}")
+
+    report = ", ".join(report) + "."
+    click.secho(str(report))
 
 
 if __name__ == "__main__":
