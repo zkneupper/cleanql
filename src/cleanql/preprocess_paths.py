@@ -3,15 +3,23 @@
 
 
 # Python standard library
+import functools
 import pathlib
 import sys
 
+# External packages
+import click
 
-def _check_if_path_provided(paths):
+
+out = functools.partial(click.secho, bold=True, err=True)
+
+
+def _check_if_path_provided(paths, ctx: click.Context):
     # paths will be a tuple, because nargs=-1
     if not paths:
-        print("No Path provided. Nothing to do 😴", flush=True)
-        sys.exit(0)
+        # print("No Path provided. Nothing to do 😴", flush=True)
+        out("No Path provided. Nothing to do 😴")
+        ctx.exit(0)
 
 
 def _paths_tuple_to_pathlib_list(paths):
@@ -45,8 +53,8 @@ def _expand_dirs(paths):
     return paths_output
 
 
-def _preprocess_paths(paths):
-    _check_if_path_provided(paths)
+def _preprocess_paths(paths, ctx: click.Context):
+    _check_if_path_provided(paths, ctx)
     paths = _paths_tuple_to_pathlib_list(paths)
     _check_paths_exist(paths)
     paths = _expand_dirs(paths)
