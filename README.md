@@ -1,4 +1,9 @@
-# Readme
+<h1 align="center">CleanQL</h1>
+
+<h2 align="center">The Uncompromising SQL Formatter</h2>
+
+
+_CleanQL_ is the uncompromising SQL code formatter. _CleanQL_ is inspired by the _Black_ Python code formatter.
 
 
 ### Command line options
