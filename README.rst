@@ -1,14 +1,17 @@
 
-.. class:: center
-=======
-cleanql
-=======
+<h1 align="center">CleanQL</h1>
+
+<h2 align="center">The Uncompromising SQL Formatter</h2>
 
 
-.. class:: center
------------------------------------
-"The uncompromising SQL formatter."
------------------------------------
+.. =======
+.. cleanql
+.. =======
+
+
+.. -----------------------------------
+.. "The uncompromising SQL formatter."
+.. -----------------------------------
 
 
 
