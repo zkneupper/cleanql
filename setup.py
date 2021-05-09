@@ -50,9 +50,14 @@ setup(
     include_package_data=True,
     keywords="cleanql",
     name="cleanql",
+    ###
     packages=find_packages(where="src"),
     package_dir={"": "src"},
+    ###
     setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
+    url="https://github.com/zkneupper/cleanql",
+    version="0.0.1",
+    zip_safe=False,
 )
