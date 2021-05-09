@@ -1,16 +1,14 @@
 
-.. :align: center
 =======
 cleanql
 =======
+    :align: center
 
 
-.. :align: center
 -----------------------------------
 "The uncompromising SQL formatter."
 -----------------------------------
-
-
+    :align: center
 
 
 .. image:: https://img.shields.io/pypi/v/cleanql.svg
