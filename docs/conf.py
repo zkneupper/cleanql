@@ -125,13 +125,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass
 # [howto, manual, or own class]).
 latex_documents = [
-    (
-        master_doc,
-        "cleanql.tex",
-        "cleanql Documentation",
-        '"Zachary Kneupper"',
-        "manual",
-    ),
+    (master_doc, "cleanql.tex", "cleanql Documentation", "Zachary Kneupper", "manual"),
 ]
 
 

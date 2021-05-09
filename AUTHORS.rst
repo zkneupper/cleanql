@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* "Zachary Kneupper" <zachary.kneupper@gmail.com">
+* Zachary Kneupper <zachary.kneupper@gmail.com>
 
 Contributors
 ------------
