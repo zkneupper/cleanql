@@ -1,6 +1,16 @@
+
+.. class:: center
 =======
 cleanql
 =======
+
+
+.. class:: center
+-----------------------------------
+"The uncompromising SQL formatter."
+-----------------------------------
+
+
 
 
 .. image:: https://img.shields.io/pypi/v/cleanql.svg
@@ -19,8 +29,6 @@ cleanql
      :alt: Updates
 
 
-
-"The uncompromising SQL formatter."
 
 
 * Free software: MIT license
