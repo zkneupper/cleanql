@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Console script for cleanql."""
 
 # Python standard library
 # import pathlib

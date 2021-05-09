@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+"""Top-level package for cleanql."""
+
+
+__author__ = "Zachary Kneupper"
+__email__ = "zachary.kneupper@gmail.com"
+__version__ = "0.0.1"
+
+
 from cleanql.formatter import (
     remove_nones,
     remove_empty_strings,
