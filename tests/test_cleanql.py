@@ -6,8 +6,9 @@ import pytest
 
 from click.testing import CliRunner
 
-from cleanql import cleanql
-from cleanql import cli
+# from cleanql import cleanql
+# from cleanql import cli
+import cleanql
 
 
 @pytest.fixture
@@ -29,9 +30,11 @@ def test_content(response):
 def test_command_line_interface():
     """Test the CLI."""
     runner = CliRunner()
-    result = runner.invoke(cli.main)
+    # result = runner.invoke(cli.main)
+    result = runner.invoke(cleanql.cli)
     assert result.exit_code == 0
-    assert "cleanql.cli.main" in result.output
+    # assert "cleanql.cli.main" in result.output
+    assert "cleanql.cli" in result.output
     help_result = runner.invoke(cli.main, ["--help"])
     assert help_result.exit_code == 0
     assert "--help  Show this message and exit." in help_result.output
