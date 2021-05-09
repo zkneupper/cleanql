@@ -1,17 +1,14 @@
 
-<h1 align="center">CleanQL</h1>
-
-<h2 align="center">The Uncompromising SQL Formatter</h2>
-
-
-.. =======
-.. cleanql
-.. =======
+:align: center
+=======
+cleanql
+=======
 
 
-.. -----------------------------------
-.. "The uncompromising SQL formatter."
-.. -----------------------------------
+:align: center
+-----------------------------------
+"The uncompromising SQL formatter."
+-----------------------------------
 
 
 
