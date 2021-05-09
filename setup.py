@@ -28,12 +28,31 @@ test_requirements = [
 
 
 setup(
+    author="Zachary Kneupper",
+    author_email="zachary.kneupper@gmail.com",
     python_requires=">=3.5",
+    classifiers=[
+        "Development Status :: 2 - Pre-Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+    ],
+    description="The uncompromising SQL formatter.",
+    entry_points={"console_scripts": ["cleanql = cleanql:cli"]},
+    install_requires=requirements,
+    license="MIT license",
+    long_description=readme + "\n\n" + history,
+    include_package_data=True,
+    keywords="cleanql",
     name="cleanql",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     setup_requires=setup_requirements,
-    entry_points={"console_scripts": ["cleanql = cleanql:cli"]},
     test_suite="tests",
     tests_require=test_requirements,
 )
