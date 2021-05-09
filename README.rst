@@ -1,11 +1,11 @@
 
-:align: center
+.. :align: center
 =======
 cleanql
 =======
 
 
-:align: center
+.. :align: center
 -----------------------------------
 "The uncompromising SQL formatter."
 -----------------------------------
