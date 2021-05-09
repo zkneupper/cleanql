@@ -3,9 +3,9 @@
 
 """Tests for `cleanql` cli."""
 
+import cleanql
 import pytest
 from click.testing import CliRunner
-import cleanql
 
 
 def test_cli_no_arguments():
