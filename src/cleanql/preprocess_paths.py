@@ -34,12 +34,12 @@ def _paths_tuple_to_pathlib_list(paths):
 
 def _check_paths_exist(paths):
     """paths: list of pathlib paths"""
-    assert all([p.exists() for p in paths])
+    assert all(p.exists() for p in paths)
 
 
 def _expand_dirs(paths):
 
-    paths_output = list()
+    paths_output = []
 
     for path in paths:
         if path.is_dir():
