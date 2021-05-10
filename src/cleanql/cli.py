@@ -42,8 +42,7 @@ def bold_color(message, color="red"):
         "yellow": "33m",
     }
     color_code = color_code_dict[color]
-    message_red_bold = f"\x1b[1;{color_code}{message}\x1b[0m"
-    return message_red_bold
+    return f"\x1b[1;{color_code}{message}\x1b[0m"
 
 
 def print_error(message):
@@ -55,7 +54,7 @@ def print_error(message):
 
 def check_filename_extension(filename, ctx: click.Context):
     # if not filename.suffix.lower() == ".sql":
-    if not filename.suffix.lower() in [".sql", ".hql"]:
+    if filename.suffix.lower() not in [".sql", ".hql"]:
         message = f"Invalid file type. `{filename}` is not a `.sql` or `.hql` file."
         print_error(message)
         ctx.exit(1)
@@ -115,8 +114,6 @@ def cli(ctx: click.Context, paths, flavor, verbose):
         out("No Python files are present to be formatted. Nothing to do 😴")
         ctx.exit(0)
 
-    reformatted = "reformatted"
-    unchanged = "left unchanged"
     failed = "failed to reformat"
 
     change_count = 0
@@ -139,14 +136,16 @@ def cli(ctx: click.Context, paths, flavor, verbose):
 
     out("All done! ✨ 🍰 ✨")
 
-    report = list()
+    report = []
 
     if change_count:
         s = "s" if change_count > 1 else ""
+        reformatted = "reformatted"
         report.append(click.style(f"{change_count} file{s} {reformatted}", bold=True))
 
     if same_count:
         s = "s" if same_count > 1 else ""
+        unchanged = "left unchanged"
         report.append(f"{same_count} file{s} {unchanged}")
 
     report = ", ".join(report) + "."

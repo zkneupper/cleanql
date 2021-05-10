@@ -43,8 +43,7 @@ def capitalize_keywords(sql, sql_keywords):
     tokens_keywords_capitalized = [
         capitalize_if_keyword(token, sql_keywords) for token in tokens
     ]
-    sql_output = "".join(tokens_keywords_capitalized)
-    return sql_output
+    return "".join(tokens_keywords_capitalized)
 
 
 def preserve_case(string):
@@ -64,8 +63,7 @@ def make_token_lower_case(string, sql_keywords):
 def apply_lower_case(sql, sql_keywords):
     tokens = split_sql(sql)
     tokens_lowered = [make_token_lower_case(token, sql_keywords) for token in tokens]
-    sql_output = "".join(tokens_lowered)
-    return sql_output
+    return "".join(tokens_lowered)
 
 
 def format_indentation(sql):
